@@ -1,0 +1,2940 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angelo Store</title>
+    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2196f3">
+    <link rel="icon" href="mpesa.jpg" sizes="32x32" type="image/jpg">
+    <link rel="icon" href="emola_icon.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="mkes.png" sizes="32x32" type="image/png">
+</head>
+<body>
+    <header style=" position:;">
+     <div class="logo">
+        <h1><i class="fas fa-store"></i> Angelo Store On</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Categorias <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu" id="categories-menu">
+                    <li><a href="#" data-category="all">Todas as Categorias</a></li>
+                    <li><a href="#" data-category="phones">Celulares</a></li>
+                    <li><a href="#" data-category="computers">Computadores</a></li>
+                    <li><a href="#" data-category="consoles">Consolas</a></li>
+                    <li><a href="#" data-category="others">Outros</a></li>
+                </ul>
+            </li>
+            <li><a href="#" id="about-us-link"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
+            <li><a href="#" id="contact-link"><i class="fas fa-envelope"></i>Contacto</a></li>
+            <li id="admin-panel-nav-item" class="hidden"><a href="#" id="admin-panel-link"><i class="fas fa-user-shield"></i> Admin</a></li> <li><a href="#" id="profile-link"><i class="fas fa-user"></i> Meu Perfil</a></li>
+            <li>
+                <a href="#" class="cart-icon open-cart-sidebar">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+    <main>
+        <section class="banner">
+            <h2>Black Friday Woza! Woza!</h2>
+            <p>Tudo pela metade pessoal não perca!</p>
+            <button id="shopNowButton">Compre Agora</button>
+        </section>
+        <section class="products">
+            <h2>Nossos Produtos</h2>
+            <div class="product-grid" id="product-grid">
+                </div>
+        </section>
+
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <img id="modal-image" src="" alt="Product Image">
+                <h3 id="modal-title"></h3>
+                <p id="modal-description"></p>
+                <p class="price" id="modal-price"></p>
+                <button id="modal-add-to-cart">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <div id="cart-sidebar" class="cart-sidebar">
+            <div class="cart-header">
+                <h2>Seu Carrinho</h2>
+                <span class="close-cart-sidebar">&times;</span>
+            </div>
+            <div id="cart-items" class="cart-items">
+                </div>
+            <div class="cart-summary">
+                <p>Total: <span id="cart-total">0.00 MT</span></p>
+                <button id="checkout-button" class="checkout-button">Finalizar Compra</button>
+            </div>
+        </div>
+
+        <div id="checkout-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal-checkout">&times;</span>
+                <h2>Finalizar Compra</h2>
+                <div class="checkout-details">
+                    <h3>Seus Itens</h3>
+                    <ul id="checkout-items-list">
+                        </ul>
+                    <p class="checkout-total">Total a Pagar: <span id="checkout-final-total">0.00 MT</span></p>
+                </div>
+
+                <div class="payment-methods">
+                    <h3>Escolha o Método de Pagamento</h3>
+                    <div class="payment-option">
+                        <input type="radio" id="mpesa" name="payment" value="mpesa">
+                        <label for="mpesa">
+                            <img src="mpesa.jpg" alt="profile.img" class="payment-icon" style="width: 50%; height: 50px;"> M-Pesa
+                        </label>
+                        <div id="mpesa-details" class="payment-input-group hidden">
+                            <input type="text" placeholder="Número M-Pesa (ex: 841234567)" class="payment-input" id="mpesa-number">
+                        </div>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="mkesh" name="payment" value="mkesh">
+                        <label for="mkesh">
+                            <img src="kesh.jpg" alt="M-Kesh" class="payment-icon" style="width: 50%; height: 50px;"> M-Kesh
+                        </label>
+                        <div id="mkesh-details" class="payment-input-group hidden">
+                            <input type="text" placeholder="Número M-Kesh (ex: 823456789)" class="payment-input" id="mkesh-number">
+                        </div>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="emola" name="payment" value="emola">
+                        <label for="emola">
+                            <img src="Movitel-1.jpeg" alt="eMola" class="payment-icon"style="width: 50%; height: 50px;" > eMola
+                        </label>
+                        <div id="emola-details" class="payment-input-group hidden">
+                            <input type="text" placeholder="Número eMola (ex: 871234567)" class="payment-input" id="emola-number">
+                        </div>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="bankCard" name="payment" value="bankCard">
+                        <label for="bankCard"><i class="fas fa-credit-card"></i> Cartão Bancário</label>
+                        <div id="bank-card-details" class="payment-input-group hidden">
+                            <input type="text" placeholder="Número do Cartão" class="card-input">
+                            <input type="text" placeholder="Nome no Cartão" class="card-input">
+                            <div class="card-expiry-cvc">
+                                <input type="text" placeholder="MM/AA" class="card-input small">
+                                <input type="text" placeholder="CVC" class="card-input small">
+                            </div>
+                        </div>
+                    </div>
+                    <button id="confirm-payment" class="confirm-payment-button">Confirmar Pagamento</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="auth-modal" class="modal">
+            <div class="modal-content auth-content">
+                <span class="close-auth-modal">&times;</span>
+                <h2 id="auth-title">Entrar</h2>
+                <form id="auth-form">
+                    <input type="email" id="auth-email" placeholder="Seu Email" required>
+                    <input type="password" id="auth-password" placeholder="Sua Senha" required>
+                    <input type="text" id="auth-name" placeholder="Seu Nome Completo (apenas para registro)" class="hidden">
+                    <button type="submit" id="auth-submit-btn">Entrar</button>
+                    <p class="auth-switch">
+                        Ainda não tem conta? <a href="#" id="switch-to-register">Registre-se</a>
+                    </p>
+                    <p class="auth-switch">
+                        Já tem conta? <a href="#" id="switch-to-login" class="hidden">Entrar</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <div id="profile-modal" class="modal">
+            <div class="modal-content profile-content">
+                <span class="close-profile-modal">&times;</span>
+                <h2><i class="fas fa-user"></i> Meu Perfil</h2>
+                <div id="profile-info">
+                    <p><strong>Nome:</strong> <span id="profile-name">Convidado</span></p>
+                    <p><strong>Email:</strong> <span id="profile-email">Não Autenticado</span></p>
+                </div>
+                <h3>Histórico de Compras</h3>
+                <ul id="payment-history-list">
+                    <li><p>Nenhuma compra registrada ainda.</p></li>
+                </ul>
+                <button id="logout-button" class="logout-button hidden">Sair</button>
+            </div>
+        </div>
+
+        <div id="about-us-modal" class="modal">
+            <div class="modal-content about-us-content">
+                <span class="close-about-us-modal">&times;</span>
+                <h2><i class="fas fa-info-circle"></i> Sobre a Angelo Store On</h2>
+                <p>Bem-vindo à <strong>Angelo Store On</strong>, sua loja online de confiança para eletrónicos de ponta em Moçambique! Fundada com a visão de trazer tecnologia acessível e de qualidade para todos, estamos comprometidos em oferecer uma experiência de compra excepcional.</p>
+                <p>Na Angelo Store On, acreditamos que a tecnologia deve ser uma ferramenta para capacitar, conectar e entreter. Por isso, selecionamos cuidadosamente cada produto, garantindo que você tenha acesso aos melhores smartphones, computadores, consolas e outros gadgets do mercado.</p>
+
+                <div class="founder-section">
+                    <h3>O Fundador</h3>
+                    <div class="founder-card">
+                        <img src="FB_IMG_1746515684686.jpg" alt="Foto do Fundador Angelo" class="profile-pic">
+                        <h4>Angelo Junior</h4>
+                        <p class="role">Fundador & CEO</p>
+                        <p class="bio">
+                            Angelo Junior é um desenvolvidor web e empreendedor apaixonado por tecnologia e inovação. Com uma vasta experiência no setor de eletrónica e um profundo conhecimento do mercado moçambicano, Angelo sonhou em criar uma plataforma onde os moçambicanos pudessem adquirir facilmente os mais recentes dispositivos. A sua dedicação à satisfação do cliente e à integridade nos negócios são os pilares da Angelo Store On.
+                        </p>
+                        <p><strong>Contacto:</strong> angelo.junior@angelostore.com</p>
+                    </div>
+                </div>
+
+                <div class="team-section">
+                    <h3>Nossa Equipe</h3>
+                    <div class="team-grid">
+                        <div class="team-member-card">
+                            <img src="img.jpeg" alt="Membro da Equipe 1" class="profile-pic">
+                            <h4>Maria José</h4>
+                            <p class="role">Directora de Operações</p>
+                            <p><strong>Contacto:</strong> maria.jose@angelostore.com</p>
+                        </div>
+                        <div class="team-member-card">
+                            <img src="equipe_member2.jpeg" alt="Membro da Equipe 2" class="profile-pic">
+                            <h4>João Carlos</h4>
+                            <p class="role">Chefe de Marketing</p>
+                            <p><strong>Contacto:</strong> joao.carlos@angelostra.com</p>
+                        </div>
+                        <div class="team-member-card">
+                            <img src="equipe_member3.jpeg" alt="Membro da Equipe 3" class="profile-pic">
+                            <h4>Ana Paula</h4>
+                            <p class="role">Gerente de Atendimento ao Cliente</p>
+                            <p><strong>Contacto:</strong> ana.paula@angelostore.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-modal" class="modal">
+            <div class="modal-content admin-content">
+                <span class="close-admin-modal">&times;</span>
+                <h2><i class="fas fa-user-shield"></i> Painel do Administrador</h2>
+
+                <div class="admin-tab-nav">
+                    <button class="admin-tab-btn active" data-tab="users">Gerenciar Usuários</button>
+                    <button class="admin-tab-btn" data-tab="transactions">Transações</button>
+                </div>
+
+                <div id="admin-users-tab" class="admin-tab-content active">
+                    <h3>Usuários Cadastrados</h3>
+                    <div class="admin-user-list-container">
+                        <ul id="admin-user-list">
+                            <li><p>Nenhum usuário registrado (mock data).</p></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="admin-transactions-tab" class="admin-tab-content hidden">
+                    <h3>Histórico de Transações</h3>
+                    <div class="admin-transaction-list-container">
+                        <ul id="admin-transaction-list">
+                            <li><p>Nenhuma transação registrada (mock data).</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="terms-modal" class="modal">
+            <div class="modal-content terms-content">
+                <span class="close-terms-modal">&times;</span>
+                <h2>Termos e Condições da Angelo Store On</h2>
+                <div class="terms-scrollable-content">
+                    <h3>1. Aceitação dos Termos</h3>
+                    <p>Ao aceder e utilizar o site da Angelo Store On, você aceita e concorda em estar vinculado pelos termos e condições presentes. Se não concordar com estes termos, por favor, não utilize este site.</p>
+
+                    <h3>2. Elegibilidade</h3>
+                    <p>Para fazer compras na Angelo Store On, você deve ter pelo menos 18 anos de idade ou ter a supervisão de um responsável legal. Ao utilizar este site, você declara e garante que cumpre este requisito.</p>
+
+                    <h3>3. Produtos e Preços</h3>
+                    <p>A Angelo Store On esforça-se para garantir que todas as descrições e preços dos produtos no site sejam precisos. No entanto, erros podem ocorrer. Reservamo-nos o direito de corrigir quaisquer erros, imprecisões ou omissões e de alterar ou atualizar informações a qualquer momento sem aviso prévio (incluindo depois de você ter submetido o seu pedido).</p>
+
+                    <h3>4. Pedidos e Pagamentos</h3>
+                    <p>Todos os pedidos estão sujeitos à disponibilidade e confirmação do preço. O pagamento é processado apenas após a criação de uma conta e início de sessão. Aceitamos os métodos de pagamento indicados no processo de checkout (M-Pesa, M-Kesh, eMola, Cartão Bancário).</p>
+                    <p>A Angelo Store On não armazena informações de cartão de crédito/débito. Todas as transações são processadas por gateways de pagamento seguros de terceiros.</p>
+
+                    <h3>5. Entrega</h3>
+                    <p>Os prazos de entrega são estimativas e podem variar. Não nos responsabilizamos por atrasos na entrega causados por circunstâncias fora do nosso controlo.</p>
+
+                    <h3>6. Devoluções e Reembolsos</h3>
+                    <p>Consulte a nossa Política de Devoluções e Reembolsos para informações detalhadas sobre como devolver produtos e solicitar reembolsos.</p>
+
+                    <h3>7. Privacidade</h3>
+                    <p>A sua privacidade é importante para nós. As suas informações pessoais serão tratadas de acordo com a nossa Política de Privacidade.</p>
+
+                    <h3>8. Propriedade Intelectual</h3>
+                    <p>Todo o conteúdo no site da Angelo Store On, incluindo textos, gráficos, logotipos, ícones, imagens e software, é propriedade da Angelo Store On ou de seus fornecedores de conteúdo e é protegido por leis de direitos autorais e marcas registradas.</p>
+
+                    <h3>9. Limitação de Responsabilidade</h3>
+                    <p>A Angelo Store On não será responsável por quaisquer danos diretos, indiretos, incidentais, especiais ou consequenciais que resultem do uso ou da incapacidade de usar este site ou de produtos adquiridos através dele.</p>
+
+                    <h3>10. Lei Aplicável</h3>
+                    <p>Estes termos e condições são regidos e interpretados de acordo com as leis da República de Moçambique.</p>
+
+                    <h3>11. Alterações aos Termos</h3>
+                    <p>Reservamo-nos o direito de atualizar ou modificar estes Termos e Condições a qualquer momento sem aviso prévio. O seu uso contínuo do site após quaisquer alterações constitui a sua aceitação dos novos Termos.</p>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Angelo Store On.</p>
+        <p><a href="#" id="terms-link">Termos e Condições</a> | <a href="#" id="privacy-link">Política de Privacidade</a></p>
+		<h3>PARCERIA COM:</h3>
+		<img src="mpesa8_hu8e3cc0100cfd500e4ebfe79d774b8d38_63725_1280x640_fill_q75_box_smart1.jpg" alt="eMola" class="payment-icon"style="width: 8%; height: 50px;" >
+    </footer>
+	<a href="https://wa.me/258834475438" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+	<div class="chatbot-container">
+        <div class="chatbot-toggle" id="chatbot-toggle">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="chatbot-modal" id="chatbot-modal">
+            <div class="chatbot-header">
+                <h3>Chat de Suporte</h3>
+                <span class="close-chatbot">×</span>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages"><div class="message bot">Olá! Como posso ajudar hoje?</div><div class="message user">ola</div><div class="message bot">Obrigado pela sua mensagem! Um administrador responderá em breve.</div></div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-user-input" placeholder="Digite sua mensagem...">
+                <button id="chatbot-send-btn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+            <div class="chatbot-admin-response hidden" id="chatbot-admin-response-section">
+                <h4>Responder como Administrador:</h4>
+                <input type="text" id="chatbot-admin-input" placeholder="Resposta do Admin...">
+                <button id="chatbot-admin-send-btn"><i class="fas fa-reply"></i></button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+<style>
+/* Reset e Estilos Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden; /* Prevent horizontal scroll due to sidebar */
+}
+
+/* Cabeçalho */
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	position: fixed;
+	width: 100%;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo h1 .fas {
+    font-size: 1.8rem;
+    color: #f39c12;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 1.5rem;
+    position: relative; /* For dropdown */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space for icon and text */
+}
+
+nav ul li a:hover {
+    color: #f39c12;
+}
+
+.cart-icon {
+    background-color: #f39c12;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    position: relative;
+}
+
+.cart-count {
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #2c3e50;
+    min-width: 180px; /* Wider for new categories */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    list-style: none;
+    top: 100%; /* Position below the parent */
+    left: 0;
+    padding: 0.5rem 0;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu li a {
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    color: white;
+    gap: 0; /* Remove gap in dropdown items if they don't have icons */
+}
+
+.dropdown-menu li a:hover {
+    background-color: #34495e;
+}
+
+
+/* Banner */
+.banner {
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    padding: 4rem 1rem;
+    margin-bottom: 2rem;
+}
+
+.banner h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+}
+
+.banner p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.banner button {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.banner button:hover {
+    background-color: #e67e22;
+}
+
+/* Products Section */
+.products {
+    padding: 0 2rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.products h2 {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-size: 2.2rem;
+    color: #2c3e50;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: white;
+    cursor: pointer; /* Indicate clickable */
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.product-card h3 {
+    padding: 1rem;
+    font-size: 1.3rem;
+    color: #34495e;
+}
+
+.product-card .price {
+    padding: 0 1rem 1rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #e74c3c;
+}
+
+.product-card button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: orange;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+}
+
+.product-card button:hover {
+    background-color: #34495e;
+}
+
+/* Rodapé */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+    font-size: 1rem;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #f39c12;
+}
+
+/* --- Modals and Sidebars --- */
+
+/* General Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-content img {
+    max-width: 80%;
+    height: auto;
+    display: block;
+    margin: 0 auto 1.5rem;
+    border-radius: 8px;
+}
+
+.modal-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    color: #2c3e50;
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+}
+
+.modal-content .price {
+    font-size: 1.6rem;
+    color: #e74c3c;
+    margin-bottom: 1.5rem;
+}
+
+.modal-content button {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+    background-color: #34495e;
+}
+
+.close-modal, .close-modal-checkout, .close-auth-modal, .close-profile-modal, .close-about-us-modal, .close-admin-modal, .close-terms-modal, .close-chatbot {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus,
+.close-modal-checkout:hover,
+.close-modal-checkout:focus,
+.close-auth-modal:hover,
+.close-auth-modal:focus,
+.close-profile-modal:hover,
+.close-profile-modal:focus,
+.close-about-us-modal:hover,
+.close-about-us-modal:focus,
+.close-admin-modal:hover,
+.close-admin-modal:focus,
+.close-terms-modal:hover,
+.close-terms-modal:focus,
+.close-chatbot:hover,
+.close-chatbot:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Cart Sidebar */
+.cart-sidebar {
+    height: 100%;
+    width: 0; /* 0 width by default, expanded with JS */
+    position: fixed;
+    z-index: 1001; /* Higher than modal */
+    top: 0;
+    right: 0;
+    background-color: #fefefe;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.open {
+    width: 350px; /* Adjust as needed */
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background-color: #2c3e50;
+    color: white;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.cart-header h2 {
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.close-cart-sidebar {
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-cart-sidebar:hover {
+    color: #f39c12;
+}
+
+.cart-items {
+    flex-grow: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.8rem;
+}
+
+.cart-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 1rem;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-details h4 {
+    margin: 0 0 0.4rem;
+    font-size: 1.1rem;
+    color: #34495e;
+}
+
+.cart-item-details .price {
+    font-size: 1rem;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.cart-item-quantity button {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 3px;
+}
+
+.cart-item-quantity span {
+    margin: 0 0.8rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.remove-item {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.7rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: 1rem;
+    transition: background-color 0.3s;
+}
+
+.remove-item:hover {
+    background-color: #c0392b;
+}
+
+.cart-summary {
+    padding: 1.5rem;
+    border-top: 2px solid #eee;
+    text-align: right;
+    background-color: #f9f9f9;
+}
+
+.cart-summary p {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.cart-summary span {
+    color: #e74c3c;
+}
+
+.checkout-button {
+    background-color: #28a745; /* Green for checkout */
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.checkout-button:hover {
+    background-color: #218838;
+}
+
+/* Checkout Modal Specifics */
+#checkout-modal .modal-content {
+    max-width: 700px;
+    text-align: left;
+}
+
+.checkout-details h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+#checkout-items-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#checkout-items-list li {
+    padding: 0.8rem 1.2rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#checkout-items-list li:last-child {
+    border-bottom: none;
+}
+
+.checkout-item-name {
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.checkout-item-qty {
+    margin-left: 1rem;
+    color: #555;
+}
+
+.checkout-item-price {
+    font-weight: bold;
+    color: #e74c3c;
+    margin-left: 1rem;
+}
+
+.checkout-total {
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px dashed #eee;
+    color: #2c3e50;
+}
+
+.checkout-total span {
+    color: #e74c3c;
+}
+
+.payment-methods {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #ddd;
+}
+
+.payment-methods h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.payment-option {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    position: relative; /* For input group positioning */
+}
+
+.payment-option input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.payment-option label {
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; /* To align icon with text */
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+}
+
+.payment-icon {
+    height: 24px; /* Adjust icon size */
+    width: auto;
+    vertical-align: middle;
+}
+
+.payment-input-group {
+    margin-top: 10px;
+    padding: 10px 0 0 30px; /* Indent under label */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%; /* Take full width below label */
+}
+
+.payment-input, .card-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.card-expiry-cvc {
+    display: flex;
+    gap: 10px;
+}
+
+.card-expiry-cvc .small {
+    width: calc(50% - 5px);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.confirm-payment-button {
+    background-color: #007bff; /* Blue for confirmation */
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.confirm-payment-button:hover {
+    background-color: #0056b3;
+}
+
+/* --- Auth Modal (Login/Register) --- */
+.auth-content {
+    max-width: 450px;
+    text-align: center;
+}
+
+.auth-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+#auth-form input[type="email"],
+#auth-form input[type="password"],
+#auth-form input[type="text"] {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#auth-form button[type="submit"] {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+#auth-form button[type="submit"]:hover {
+    background-color: #e67e22;
+}
+
+.auth-switch {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.auth-switch a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* --- Profile Modal --- */
+.profile-content {
+    max-width: 600px;
+    text-align: left;
+}
+
+.profile-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+#profile-info {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: #f9f9f9;
+}
+
+#profile-info p {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+#profile-info strong {
+    color: #34495e;
+}
+
+.profile-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+#payment-history-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+#payment-history-list li {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+#payment-history-list li:last-child {
+    border-bottom: none;
+}
+
+#payment-history-list li p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.history-date, .history-amount {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.history-item-details {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.logout-button {
+    background-color: #dc3545; /* Red for logout */
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+/* --- About Us Modal --- */
+.about-us-content {
+    max-width: 800px;
+    text-align: left;
+}
+
+.about-us-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.about-us-content p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+.about-us-content strong {
+    color: #34495e;
+}
+
+.founder-section, .team-section {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.founder-section h3, .team-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.founder-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid #f39c12;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.founder-card h4, .team-member-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #34495e;
+}
+
+.role {
+    font-style: italic;
+    color: #777;
+    margin-bottom: 1rem;
+}
+
+.bio {
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.team-member-card {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.team-member-card .profile-pic {
+    width: 100px;
+    height: 100px;
+}
+
+/* --- Admin Panel Modal --- */
+.admin-content {
+    max-width: 900px; /* Wider for admin data */
+    text-align: left;
+}
+
+.admin-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.admin-tab-nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #eee;
+}
+
+.admin-tab-btn {
+    background-color: #f2f2f2;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #555;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px 5px 0 0;
+    margin: 0 5px;
+}
+
+.admin-tab-btn.active {
+    background-color: #3498db;
+    color: white;
+    border-bottom: 2px solid #3498db;
+}
+
+.admin-tab-btn:hover:not(.active) {
+    background-color: #e0e0e0;
+}
+
+.admin-tab-content h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.admin-user-list-container, .admin-transaction-list-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #f9f9f9;
+}
+
+#admin-user-list, #admin-transaction-list {
+    list-style: none;
+    padding: 0;
+}
+
+#admin-user-list li, #admin-transaction-list li {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#admin-user-list li:last-child, #admin-transaction-list li:last-child {
+    border-bottom: none;
+}
+
+#admin-user-list li p, #admin-transaction-list li p {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.reset-password-btn {
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+
+.reset-password-btn:hover {
+    background-color: #e0a800;
+}
+
+/* --- Terms and Conditions Modal --- */
+.terms-content {
+    max-width: 700px;
+    text-align: left;
+}
+
+.terms-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #2c3e50;
+}
+
+.terms-scrollable-content {
+    max-height: 70vh; /* Make content scrollable if too long */
+    overflow-y: auto;
+    padding-right: 15px; /* Space for scrollbar */
+}
+
+.terms-scrollable-content h3 {
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: #34495e;
+}
+
+.terms-scrollable-content p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    color: #555;
+}
+
+/* --- WhatsApp Floating Button --- */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000; /* Ensure it's above other elements */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none; /* Remove underline */
+    transition: transform 0.3s ease-in-out;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-float i {
+    font-size: 30px;
+}
+
+
+/* --- Chatbot Styles --- */
+.chatbot-container {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    z-index: 1000;
+}
+
+.chatbot-toggle {
+    width: 60px;
+    height: 60px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease-in-out, background-color 0.3s;
+}
+
+.chatbot-toggle:hover {
+    transform: scale(1.1);
+    background-color: #2980b9;
+}
+
+.chatbot-modal {
+    display: none; /* Hidden by default */
+    position: absolute;
+    bottom: 75px; /* Above the toggle button */
+    left: -20px; /* Adjust as needed */
+    width: 320px;
+    height: 450px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chatbot-modal.open {
+    display: flex;
+}
+
+.chatbot-header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.chatbot-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.close-chatbot {
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.chatbot-messages {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    background-color: #f7f9fb;
+    border-bottom: 1px solid #eee;
+}
+
+.message {
+    padding: 0.7rem 1rem;
+    margin-bottom: 0.8rem;
+    border-radius: 15px;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 0.95rem;
+}
+
+.message.user {
+    background-color: #e0f2fe; /* Light blue */
+    align-self: flex-end; /* Align to the right */
+    margin-left: auto; /* Push to the right */
+    border-bottom-right-radius: 5px;
+}
+
+.message.bot {
+    background-color: #e6e6e6; /* Light gray */
+    align-self: flex-start; /* Align to the left */
+    margin-right: auto; /* Push to the left */
+    border-bottom-left-radius: 5px;
+}
+
+.message.admin {
+    background-color: #d4edda; /* Light green */
+    align-self: flex-start; /* Align to the left */
+    margin-right: auto;
+    border-bottom-left-radius: 5px;
+}
+
+.chatbot-input {
+    display: flex;
+    padding: 0.8rem;
+    border-top: 1px solid #eee;
+}
+
+.chatbot-input input {
+    flex-grow: 1;
+    padding: 0.6rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+}
+
+.chatbot-input button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.chatbot-input button:hover {
+    background-color: #2980b9;
+}
+
+.chatbot-admin-response {
+    padding: 0.8rem;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ddd;
+}
+
+.chatbot-admin-response h4 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.chatbot-admin-response input {
+    width: calc(100% - 45px); /* Adjust for button */
+    padding: 0.6rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+.chatbot-admin-response button {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+    vertical-align: middle;
+}
+
+.chatbot-admin-response button:hover {
+    background-color: #e67e22;
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 0.8rem;
+    }
+
+    .logo h1 {
+        font-size: 1.3rem;
+    }
+
+    nav ul {
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    nav ul li {
+        margin: 0.5rem 0;
+    }
+
+    .banner {
+        padding: 2.5rem 1rem;
+    }
+
+    .banner h2 {
+        font-size: 2rem;
+    }
+
+    .banner p {
+        font-size: 1rem;
+    }
+
+    .products {
+        padding: 0 1rem 2rem;
+    }
+
+    .products h2 {
+        font-size: 1.8rem;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .product-card img {
+        height: 180px;
+    }
+
+    .product-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .product-card .price {
+        font-size: 1.1rem;
+    }
+
+    .cart-sidebar.open {
+        width: 280px; /* Smaller width on mobile */
+    }
+
+    .modal-content {
+        padding: 1.5rem;
+    }
+
+    .modal-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .modal-content .price {
+        font-size: 1.4rem;
+    }
+
+    .checkout-details h3, .payment-methods h3, .auth-content h2, .profile-content h2, .profile-content h3, .about-us-content h2, .founder-section h3, .team-section h3, .admin-content h2, .admin-tab-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .checkout-total {
+        font-size: 1.4rem;
+    }
+
+    .confirm-payment-button, #auth-form button[type="submit"], .logout-button {
+        font-size: 1.1rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .payment-input-group {
+        padding-left: 15px; /* Adjust indent */
+    }
+
+    #payment-history-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .about-us-content p {
+        font-size: 1rem;
+    }
+
+    .founder-card h4, .team-member-card h4 {
+        font-size: 1.3rem;
+    }
+
+    .admin-tab-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .admin-tab-btn {
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    #admin-user-list li, #admin-transaction-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .reset-password-btn {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    /* Mobile adjustments for floating buttons */
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+
+    .chatbot-container {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .chatbot-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
+    }
+
+    .chatbot-modal {
+        width: 280px; /* Smaller modal on mobile */
+        height: 400px;
+        bottom: 65px; /* Adjust position */
+        left: -10px;
+    }
+}
+/* ... (Seu CSS existente aqui) ... */
+
+/* Notification Message */
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745; /* Green for success */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 10000; /* On top of everything */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.notification.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ... (Restante do seu CSS) ... */
+</style>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js")
+    .then(() => console.log("Service Worker registrado!"))
+    .catch(err => console.log("Erro no SW:", err));
+}
+ 
+// Data for products (with added categories)
+const products = [
+    { id: 1, name: "Iphone 14 Prom max 1TB", price: 69000.00, image: "Apple-iPhone-14-Pro-iPhone-14-Pro-Max-deep-purple-220907-geo_inline.jpg.large.jpg", description: "O mais recente iPhone 14 Pro Max com 1TB de armazenamento, câmera avançada e chip A16 Bionic.", category: "phones" },
+    { id: 2, name: "Samsung Ultra 24 1TB", price: 55000.00, image: "s24u-2.jpeg", description: "Samsung Galaxy S24 Ultra com 1TB, S Pen integrada, e o melhor sistema de câmera da categoria.", category: "phones" },
+    { id: 3, name: "Lap Top Core i9", price: 99000.00, image: "2010_i9_2.jpg", description: "Poderoso laptop com processador Intel Core i9, 32GB RAM e SSD de 1TB para alta performance.", category: "computers" },
+    { id: 4, name: "JBL Bluetooth Speaker", price: 25000.00, image: "JBLPartyboxEncorewithMic_Front.PNG", description: "Caixa de som Bluetooth JBL com som potente, bateria de longa duração e design robusto.", category: "others" },
+    { id: 5, name: "Fones Beat Studio Pro", price: 5500.00, image: "51UW5LIwT0L.jpg", description: "Fones de ouvido Beats Studio Pro com cancelamento de ruído adaptável e áudio espacial.", category: "others" },
+    { id: 6, name: "HEAD SET GAMER", price: 5000.00, image: "RUNMUS-Gaming-Headset-with-7-1-Surround-Sound-LED-Light-Bass-Surround-for-PS4-PS5-Laptop-Mac-Nintendo-Red_1661a747-17cf-43b1-a08b-abfc383a68c9.c3af11c09862329a8e95d6ea1d5cb453(0).jpeg", description: "Headset gamer com áudio imersivo, microfone retrátil e iluminação RGB para a melhor experiência de jogo.", category: "consoles" },
+    { id: 7, name: "PlayStation 5", price: 65000.00, image: "51 qnZm7V7L.jpg", description: "Consola de última geração da Sony, com gráficos realistas e tempos de carregamento ultra-rápidos.", category: "consoles" },
+    { id: 8, name: "MacBook Air M2", price: 120000.00, image: "macbook-air-13-quot-i5-4gb-128gb-m12-refurbished-class-b-warranty-12-months.jpg", description: "MacBook Air leve e potente com chip M2 da Apple para trabalho e lazer.", category: "computers" },
+    { id: 9, name: "Smartwatch Ultra", price: 8000.00, image: "MYPA3ref_VW_34FR watch-case-49-titanium-black-ultra2_VW_34FR watch-face-49-ocean-ultra2_VW_34FR.png", description: "Smartwatch avançado com monitoramento de saúde completo e GPS integrado.", category: "others" },
+
+    // --- Adição de mais produtos (20 por categoria) ---
+    // Phones (até 29)
+    { id: 10, name: "Xiaomi Redmi Note 13 Pro", price: 28000.00, image:"Xiaomi-Redmi-Note-13-PRO-5G-256GB-Smartphone-Unlocked-Aurora-Purple_a6f7f021-b275-493a-b83f-7e2a5b848686.e458a7278b2916239ca1db889281e265.jpeg", description: "Smartphone com câmera de alta resolução e bateria de longa duração.", category: "phones" },
+    { id: 11, name: "Google Pixel 8 Pro", price: 70000.00, image: "google_pixel_9_pro_512gb_display_6_3_hazel_original_6525_1_6a6ab820f1bf97c288901531523294f5.jpg", description: "Experiência Android pura com a melhor câmera computacional do mercado.", category: "phones" },
+    { id: 12, name: "OnePlus 12", price: 58000.00, image: "0.17051300_1709600185_oneplus-12-5g-cph2581-dual-sim-512gb-green-16gb-ram-global-version.jpg", description: "Velocidade e performance com carregamento ultra-rápido.", category: "phones" },
+    { id: 13, name: "Oppo Find X7 Ultra", price: 62000.00, image: "oppo_reno_12-.jpg", description: "Fotografia móvel de ponta e design elegante.", category: "phones" },
+    { id: 14, name: "Vivo X100 Pro", price: 39000.00, image: "51ov885cpQL._AC_SL1100_.jpg", description: "Câmera Zeiss e performance excepcional.", category: "phones" },
+    { id: 15, name: "Asus ROG Phone 8 Pro", price: 75000.00, image: "celer_image_2_-_2025-01-08t165411.731.jpg", description: "O smartphone definitivo para gamers, com resfriamento avançado.", category: "phones" },
+    { id: 16, name: "Motorola Edge 50 Pro", price: 85000.00,image: "motorola-edge-50-pro-5g.jpg", description: "Design premium e ecrã vibrante com carregamento rápido.", category: "phones" },
+    { id: 17, name: "Huawei P60 Pro", price: 48000.00, image: "26181AE0-841B-4EC4-9ED4-FB0641070FF6.png", description: "Tecnologia de câmera inovadora e elegância.", category: "phones" },
+    { id: 18, name: "Honor Magic6 Pro", price: 60000.00, image: "honor-magic-6-pro-1713250015034918431.jpg", description: "Desempenho de topo e longa duração da bateria.", category: "phones" },
+    { id: 19, name: "Realme GT 5 Pro", price: 42000.00, image: "57439-realme-gt5-pro-2.jpg", description: "Flagship killer com especificações impressionantes.", category: "phones" },
+    { id: 20, name: "Sony Xperia 1 VI", price: 68000.00, image: "41xz82sX5eL._UF1000,1000_QL80_.jpg", description: "Excelência em multimédia e fotografia profissional.", category: "phones" },
+    { id: 21, name: "Infinix Note 40 Pro+", price: 22000.00, image: "Infinix_Note_40_Pro_-_KalPay_-5380038.jpg", description: "Ótimo custo-benefício com carregamento super rápido.", category: "phones" },
+    { id: 22, name: "Tecno Camon 30 Premier", price: 35000.00, image: "s-l1200(0).jpg", description: "Câmera focada em retratos e design elegante.", category: "phones" },
+    { id: 23, name: "Poco F6 Pro", price: 39000.00, image: "1-4013b3c02c939fb1af17295412626382-1024-1024.jpg", description: "Desempenho extremo para gamers e multitarefas.", category: "phones" },
+    { id: 24, name: "Nothing Phone (2a)", price: 39000.00, image: "71tfX-0J2SL._UF894,1000_QL80_.jpg", description: "Design único com interface Glyph e boa performance.", category: "phones" },
+    { id: 25, name: "Fairphone 5", price: 45000.00, image: "LD0006188477.jpg", description: "Smartphone modular e sustentável, fácil de reparar.", category: "phones" },
+    { id: 26, name: "Samsung Galaxy A55", price: 29000.00, image: "51ESx4YdjWL._AC_UF1000_1000_QL80_311a8e3c-210c-4451-b400-c094c8d73c5a_700x.jpg", description: "Custo-benefício equilibrado com boa câmera e bateria.", category: "phones" },
+    { id: 27, name: "Iphone 13", price: 44000.00, image: "Apple_iPhone-13-Pro_iPhone-13-Pro-Max_GEO_09142021_inline.jpg.large.jpg", description: "Versão anterior do iPhone, ainda potente e com ótimo ecossistema.", category: "phones" },
+    { id: 28, name: "Samsung Galaxy Z Fold5", price: 150000.00, image: "67343_1691059270.jpg", description: "Smartphone dobrável com ecrã grande para produtividade.", category: "phones" },
+    { id: 29, name: "Iphone SE (2025)", price: 55000.00, image: "iphone-se-4th-gen-2024-v0-x939lzbxtfic1.jpg", description: "Compacto, poderoso e acessível da Apple.", category: "phones" },
+
+    // Computers (até 49)
+    { id: 30, name: "Dell XPS 15", price: 110000.00, image: "81-QcFPVt-L._UF894,1000_QL80_.jpg", description: "Laptop premium para produtividade e criatividade com ecrã deslumbrante.", category: "computers" },
+    { id: 31, name: "HP Spectre x360 14", price: 95000.00, image: "hp_spectre_x360_14_ea0023dx_135_touch_sc-1650436301-81-e.jpeg", description: "2 em 1 versátil com design elegante e performance robusta.", category: "computers" },
+    { id: 32, name: "Lenovo ThinkPad X1 Carbon", price: 105000.00, image: "lenovo-laptops-x1-carbon-6th-gen-hero.PNG", description: "Laptop empresarial ultraleve e durável com segurança avançada.", category: "computers" },
+    { id: 33, name: "Microsoft Surface Laptop Studio 2", price: 130000.00, image: "81Vep45DQ4L._AC_SL1500_.jpg", description: "Para criadores, com ecrã dinâmico e gráficos potentes.", category: "computers" },
+    { id: 34, name: "Acer Predator Helios 300", price: 80000.00, image: "71sS7G5ZpQL._AC_SL1500_.jpg", description: "Laptop gamer com alta taxa de atualização e resfriamento eficiente.", category: "computers" },
+    { id: 35, name: "ASUS ROG Zephyrus G14", price: 90000.00, image: "61PouaE9IaL._AC_SL1500_.jpg", description: "Portátil gamer compacto e poderoso com excelente duração de bateria.", category: "computers" },
+    { id: 36, name: "MSI GE78 HX Raider", price: 140000.00, image: "61Vdzu3D7yL._UF894,1000_QL80_(0).jpg", description: "O melhor em performance gamer com ecrã grande e RGB personalizável.", category: "computers" },
+    { id: 37, name: "Razer Blade 16", price: 160000.00, image: "Razer_Blade_16_2023.jpg", description: "Laptop gamer de luxo com construção premium e desempenho superior.", category: "computers" },
+    { id: 38, name: "Gigabyte Aero 16 OLED", price: 125000.00, image: "4zu3_Gigabyte_Aero_16_YE5_01.jpg", description: "Ideal para criadores de conteúdo com ecrã OLED vívido.", category: "computers" },
+    { id: 39, name: "Alienware m18", price: 170000.00, image: "csm_m18r2_e961de53a2.jpg", description: "Estação de jogo móvel com ecrã de 18 polegadas e componentes de ponta.", category: "computers" },
+    { id: 40, name: "Lenovo Yoga 7i (16 Gen 9)", price: 78000.00, image: "81qy2vrwzqoeny954hdpqtvre8zkzq471309.png", description: "Laptop versátil para trabalho e entretenimento, com tela grande.", category: "computers" },
+    { id: 41, name: "HP Envy x360 15", price: 68000.00, image: "con-nb-gidget-22c1-hp-envy-x360-15-es2000-product-image.png", description: "Conversível acessível com ótimo desempenho e ecrã táctil.", category: "computers" },
+    { id: 42, name: "Acer Swift Go 14", price: 55000.00, image: "Triton 300 - Floating.png", description: "Leve e portátil para o dia a dia, com boa duração de bateria.", category: "computers" },
+    { id: 43, name: "Dell Inspiron 16 Plus", price: 72000.00, image: "81mYk19l9pL.jpg", description: "Laptop de uso geral com ecrã grande e desempenho sólido.", category: "computers" },
+    { id: 44, name: "Chromebook Plus (HP)", price: 30000.00, image: "1cb359b3-7abb-4d80-b3ef-604547f91f15.jpg", description: "Chromebook rápido e eficiente para tarefas online e produtividade.", category: "computers" },
+    { id: 45, name: "Samsung Galaxy Book4 Pro", price: 98000.00, image: "4io7l3g87kj5vajysyr4bs00q7ktxs176032.png", description: "Laptop fino e leve com ecrã AMOLED e integração com ecossistema Samsung.", category: "computers" },
+    { id: 46, name: "Apple Mac Studio (M2 Ultra)", price: 350000.00, image: "Apple-WWDC23-M2-Ultra-Mac-Studio-Studio-Display-6-Pro-Display-XDR-support-230605.jpg.large_2x.jpg", description: "Desktop compacto e extremamente potente para profissionais de criatividade.", category: "computers" },
+    { id: 47, name: "Custom Gaming PC (Entry)", price: 90000.00, image: "634f208f35a69031250c6833-rgb-intel-gaming-pc-desktop-computer-gtx.jpg", description: "PC desktop para jogos de entrada, montado sob medida.", category: "computers" },
+    { id: 48, name: "Mini PC Intel NUC", price: 25000.00, image: "65b2536cf6c8795942014014-intel-nuc-11-nuc11pahi7-16gb-ddr4.jpg", description: "Computador compacto para casa ou escritório, economiza espaço.", category: "computers" },
+    { id: 49, name: "Workstation Dell Precision", price: 200000.00, image: "Dell-Precision-7680-Laptop-Main.png", description: "Estação de trabalho profissional para tarefas exigentes de engenharia e design.", category: "computers" },
+
+    // Consoles (até 69)
+    { id: 50, name: "Xbox Series X", price: 62000.00, image: "250px-Xbox-360-Pro-wController.jpg", description: "A consola mais potente da Xbox, com jogos em 4K e tempos de carregamento rápidos.", category: "consoles" },
+    { id: 51, name: "Nintendo Switch OLED", price: 38000.00, image: "61XUxyAtX3L._UF1000,1000_QL80_.jpg", description: "Versão aprimorada do Switch com tela OLED vibrante e maior armazenamento.", category: "consoles" },
+    { id: 52, name: "PlayStation 5 Digital Edition", price: 58000.00, image: "51byUHXe12L.jpg", description: "PS5 sem drive de disco, para jogos digitais, mais compacta.", category: "consoles" },
+    { id: 53, name: "Xbox Series S", price: 32000.00, image: "692b4f9a-36c2-49b3-8ee8-2b7c51504d20.0daff5ea982257b1130c933d87498409.jpeg", description: "Consola digital compacta, ideal para quem busca economia e jogos em 1440p.", category: "consoles" },
+    { id: 54, name: "Steam Deck OLED", price: 50000.00, image: "41hJ3s9qW-L.jpg", description: "PC gamer portátil da Valve com ecrã OLED para jogar seus jogos Steam em qualquer lugar.", category: "consoles" },
+    { id: 55, name: "ROG Ally", price: 45000.00, image: "392428-590446.png", description: "Dispositivo de jogo portátil Windows, com gráficos potentes.", category: "consoles" },
+    { id: 56, name: "Meta Quest 3 (128GB)", price: 40000.00, image: "61ST5kfuMBL.jpg", description: "Óculos de Realidade Virtual standalone com realidade mista avançada.", category: "consoles" },
+    { id: 57, name: "PlayStation 4 Slim", price: 35000.00, image: "PS4_Slim_1TB_Days_Gone_Caixa__07390_zoom.jpg", description: "Realidade Virtual de nova geração para PlayStation 5, com gráficos imersivos.", category: "consoles" },
+    { id: 58, name: "Pico 4", price: 28000.00, image: "PICO 4 Ultra Consumer.png", description: "Headset VR standalone leve e confortável com ecrãs de alta resolução.", category: "consoles" },
+    { id: 59, name: "Valve Index Full Kit", price: 120000.00, image: "71ZgOpN805L._UF894,1000_QL80_.jpg", description: "Sistema de VR premium para PC, com os melhores controladores e rastreamento.", category: "consoles" },
+    { id: 60, name: "Logitech G Cloud Gaming Handheld", price: 18000.00, image: "cloud-handheld-gallery-1.png", description: "Dispositivo portátil focado em jogos na nuvem.", category: "consoles" },
+    { id: 61, name: "Analogue Pocket", price: 10000.00, image: "analogue-black-and-white.png", description: "Consola portátil que emula com precisão jogos de Game Boy, Game Gear e outros.", category: "consoles" },
+    { id: 62, name: "Evercade EXP", price: 8000.00, image: "Evercade_EXP-Double-Dragon-Gear_Screen.jpg", description: "Consola portátil com jogos retrô em cartuchos, incluindo títulos de arcade.", category: "consoles" },
+    { id: 63, name: "Xbox Elite Wireless Controller Series 2", price: 12000.00, image: "717XTm0moDL.jpg", description: "Comando profissional para Xbox e PC, personalizável.", category: "consoles" },
+    { id: 64, name: "DualSense Edge Wireless Controller", price: 10000.00, image: "516PcdpdYRL.jpg", description: "Comando de elite para PS5, personalizável para vantagem competitiva.", category: "consoles" },
+    { id: 65, name: "Nintendo Switch Pro Controller", price: 6000.00, image: "Nintendo-Switch-Pro-Controller_157afd29-6067-475b-a8f4-6cd2b0d4bd3d.e4a8a90ca46815cd7c1d2247f4a02011.jpeg", description: "Comando ergonómico e de alta qualidade para Nintendo Switch.", category: "consoles" },
+    { id: 66, name: "Turtle Beach Stealth Pro Headset", price: 8000.00, image: "423345-Product-0-I-638240340106647170.jpg", description: "Headset gamer sem fio premium com cancelamento de ruído.", category: "consoles" },
+    { id: 67, name: "Astro A50 X Wireless Headset", price: 9500.00, image: "console_placeholder.jpg", description: "Headset gamer de ponta com estação base para múltiplas plataformas.", category: "consoles" },
+    { id: 68, name: "Elgato Stream Deck MK.2", price: 7000.00, image: "console_placeholder.jpg", description: "Controlador programável para streamers e criadores de conteúdo.", category: "consoles" },
+    { id: 69, name: "Webcam Logitech C920S", price: 3500.00, image: "console_placeholder.jpg", description: "Webcam Full HD para streaming e videochamadas.", category: "consoles" },
+
+    // Others (até 89)
+    { id: 70, name: "Samsung Smart TV 45 polegadas", price: 7000.00, image: "other_placeholder.jpg", description: "Assistente inteligente com tela, para casa conectada.", category: "others" },
+    { id: 71, name: "Samsung Smart TV 55 polegadas", price: 4000.00, image: "other_placeholder.jpg", description: "Boa tela com qualidade 2180 megapixels.", category: "others" },
+    { id: 72, name: "Microsoft Smart TV", price: 12000.00, image: "other_placeholder.jpg", description: "Kit de iluminação inteligente com lâmpadas e hub.", category: "others" },
+    { id: 73, name: " Powerbank 20000mAh", price: 4500.00, image: "other_placeholder.jpg", description: "Power bank de alta capacidade para carregar seus dispositivos em movimento.", category: "others" },
+    { id: 74, name: "SanDisk Extreme Portable SSD 1TB", price: 10000.00, image: "other_placeholder.jpg", description: "SSD externo rápido e durável para armazenamento de dados.", category: "others" },
+    { id: 75, name: "Roteador Wi-Fi 6 TP-Link Archer AX55", price: 7500.00, image: "other_placeholder.jpg", description: "Roteador de alta velocidade para uma rede Wi-Fi robusta.", category: "others" },
+    { id: 76, name: "Drone DJI Mini 4 Pro", price: 48000.00, image: "other_placeholder.jpg", description: "Drone compacto e avançado com câmera 4K para filmagens aéreas.", category: "others" },
+    { id: 77, name: "GoPro HERO12 Black", price: 35000.00, image: "other_placeholder.jpg", description: "Câmera de ação robusta para aventuras, com estabilização de vídeo.", category: "others" },
+    { id: 78, name: "Impressora Multifuncional Epson EcoTank L3250", price: 15000.00, image: "other_placeholder.jpg", description: "Impressora jato de tinta com tanques de tinta recarregáveis e Wi-Fi.", category: "others" },
+    { id: 79, name: "Câmera de Segurança TP-Link Tapo C200", price: 3000.00, image: "other_placeholder.jpg", description: "Câmera de segurança Wi-Fi com visão noturna e rotação.", category: "others" },
+    { id: 80, name: "Kindle Paperwhite 11ª Geração", price: 9000.00, image: "other_placeholder.jpg", description: "Leitor de e-books à prova d'água com tela sem reflexo.", category: "others" },
+    { id: 81, name: "Apple AirTag (4-pack)", price: 8000.00, image: "other_placeholder.jpg", description: "Rastreadores de objetos para encontrar seus itens perdidos.", category: "others" },
+    { id: 82, name: "Suporte de Monitor Articulado Ergonômico", price: 3500.00, image: "other_placeholder.jpg", description: "Melhore sua postura e organize seu espaço de trabalho.", category: "others" },
+    { id: 83, name: "Teclado Mecânico HyperX Alloy Origins Core", price: 8000.00, image: "other_placeholder.jpg", description: "Teclado gamer compacto e durável com iluminação RGB.", category: "others" },
+    { id: 84, name: "Mouse Gamer Logitech G502 HERO", price: 5000.00, image: "other_placeholder.jpg", description: "Mouse de alta precisão com botões programáveis para jogos.", category: "others" },
+    { id: 85, name: "Microfone HyperX QuadCast S", price: 7000.00, image: "other_placeholder.jpg", description: "Microfone USB para streaming e gravação de alta qualidade.", category: "others" },
+    { id: 86, name: "Carregador Sem Fio Anker PowerWave", price: 2500.00, image: "other_placeholder.jpg", description: "Carregador rápido sem fio para smartphones compatíveis.", category: "others" },
+    { id: 87, name: "Projetor Portátil Nebula Capsule 3 Laser", price: 30000.00, image: "other_placeholder.jpg", description: "Projetor mini com Android TV e bateria, para entretenimento em qualquer lugar.", category: "others" },
+    { id: 88, name: "Smart TV Xiaomi P1E 43 polegadas", price: 20000.00, image: "other_placeholder.jpg", description: "Smart TV com Android TV e resolução 4K para sua sala.", category: "others" },
+    { id: 89, name: "Aspirador Robô Xiaomi Robot Vacuum E10", price: 15000.00, image: "other_placeholder.jpg", description: "Aspirador robô inteligente para limpeza automática do seu lar.", category: "others" },
+
+];
+
+
+// Shopping Cart (using localStorage for persistence)
+let cart = JSON.parse(localStorage.getItem('angeloStoreCart')) || [];
+
+// User Authentication State (Client-side simulation - REALITY: managed by backend session/tokens)
+// Mock user data for demonstration, including a simple payment history and role
+let currentUser = JSON.parse(localStorage.getItem('angeloStoreUser')) || null;
+if (currentUser && !currentUser.paymentHistory) {
+    currentUser.paymentHistory = []; // Ensure paymentHistory exists even for old mock users
+}
+
+// Painel do admin
+const mockUsers = JSON.parse(localStorage.getItem('angeloStoreMockUsers')) || [
+    { id: 'user1', name: 'Bernardo ', email: 'bernardo@angelostore.com', role: 'user', paymentHistory: [
+        { id: 'TRX101', date: '05/08/2025', amount: 55000, description: 'Samsung Ultra 24', items: [{ name: 'Samsung Ultra 24 1TB', qty: 1, price: 55000 }] },
+        { id: 'TRX102', date: '02/08/2025', amount: 25000, description: 'JBL Speaker', items: [{ name: 'JBL Bluetooth Speaker', qty: 1, price: 25000 }] }
+    ]},
+    { id: 'user2', name: 'Bruno Costa', email: 'bruno@example.com', role: 'user', paymentHistory: [
+        { id: 'TRX103', date: '04/08/2025', amount: 15000, description: 'Fones Beat Studio', items: [{ name: 'Fones Beat Studio Pro', qty: 1, price: 15000 }] }
+    ]},
+    { id: 'admin1', name: 'Administrador', email: 'admin@gmail.com', role: 'admin', paymentHistory: [] }
+];
+localStorage.setItem('angeloStoreMockUsers', JSON.stringify(mockUsers));
+
+// Chatbot messages (simulated - in real app, these would come from/go to a backend)
+let chatMessages = JSON.parse(localStorage.getItem('angeloStoreChatMessages')) || [
+    { sender: 'bot', text: 'Olá! Como posso ajudar hoje?' }
+];
+
+// --- DOM Elements ---
+
+// Product Display
+const productGrid = document.getElementById('product-grid');
+const shopNowButton = document.getElementById('shopNowButton');
+const categoryLinks = document.querySelectorAll('#categories-menu a');
+
+// Product Modal
+const productModal = document.getElementById('product-modal');
+const modalImage = document.getElementById('modal-image');
+const modalTitle = document.getElementById('modal-title');
+const modalPrice = document.getElementById('modal-price');
+const modalDescription = document.getElementById('modal-description');
+const modalAddToCartButton = document.getElementById('modal-add-to-cart');
+const closeModalButton = document.querySelector('.close-modal');
+let currentProductInModal = null;
+
+// Shopping Cart Sidebar
+const cartCountSpan = document.querySelector('.cart-count');
+const cartSidebar = document.getElementById('cart-sidebar');
+const cartItemsList = document.getElementById('cart-items');
+const cartTotalSpan = document.getElementById('cart-total');
+const openCartSidebarBtn = document.querySelector('.open-cart-sidebar');
+const closeCartSidebarBtn = document.querySelector('.close-cart-sidebar');
+const checkoutButton = document.getElementById('checkout-button');
+
+// Checkout Modal
+const checkoutModal = document.getElementById('checkout-modal');
+const closeCheckoutModalButton = document.querySelector('.close-modal-checkout');
+const checkoutItemsList = document.getElementById('checkout-items-list');
+const checkoutFinalTotalSpan = document.getElementById('checkout-final-total');
+const paymentOptions = document.querySelectorAll('input[name="payment"]');
+const mpesaDetailsDiv = document.getElementById('mpesa-details');
+const mkeshDetailsDiv = document.getElementById('mkesh-details');
+const emolaDetailsDiv = document.getElementById('emola-details');
+const bankCardDetailsDiv = document.getElementById('bank-card-details');
+const confirmPaymentButton = document.getElementById('confirm-payment');
+
+// Authentication Modal
+const authModal = document.getElementById('auth-modal');
+const closeAuthModalButton = document.querySelector('.close-auth-modal');
+const authTitle = document.getElementById('auth-title');
+const authForm = document.getElementById('auth-form');
+const authEmailInput = document.getElementById('auth-email');
+const authPasswordInput = document.getElementById('auth-password');
+const authNameInput = document.getElementById('auth-name');
+const authSubmitBtn = document.getElementById('auth-submit-btn');
+const switchToRegisterLink = document.getElementById('switch-to-register');
+const switchToLoginLink = document.getElementById('switch-to-login');
+
+// Profile Modal (User Dashboard)
+const profileLink = document.getElementById('profile-link');
+const profileModal = document.getElementById('profile-modal');
+const closeProfileModalButton = document.querySelector('.close-profile-modal');
+const profileNameSpan = document.getElementById('profile-name');
+const profileEmailSpan = document.getElementById('profile-email');
+const paymentHistoryList = document.getElementById('payment-history-list');
+const logoutButton = document.getElementById('logout-button');
+
+// About Us Modal
+const aboutUsLink = document.getElementById('about-us-link');
+const aboutUsModal = document.getElementById('about-us-modal');
+const closeAboutUsModalButton = document.querySelector('.close-about-us-modal');
+
+// Admin Panel
+const adminPanelNavItem = document.getElementById('admin-panel-nav-item');
+const adminPanelLink = document.getElementById('admin-panel-link');
+const adminModal = document.getElementById('admin-modal');
+const closeAdminModalButton = document.querySelector('.close-admin-modal');
+const adminTabButtons = document.querySelectorAll('.admin-tab-btn');
+const adminUsersTab = document.getElementById('admin-users-tab');
+const adminTransactionsTab = document.getElementById('admin-transactions-tab');
+const adminUserList = document.getElementById('admin-user-list');
+const adminTransactionList = document.getElementById('admin-transaction-list');
+
+// Terms & Conditions
+const termsLink = document.getElementById('terms-link');
+const termsModal = document.getElementById('terms-modal');
+const closeTermsModalButton = document.querySelector('.close-terms-modal');
+
+// Chatbot
+const chatbotToggle = document.getElementById('chatbot-toggle');
+const chatbotModal = document.getElementById('chatbot-modal');
+const closeChatbotButton = document.querySelector('.close-chatbot');
+const chatbotMessagesDiv = document.getElementById('chatbot-messages');
+const chatbotUserInput = document.getElementById('chatbot-user-input');
+const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+const chatbotAdminResponseSection = document.getElementById('chatbot-admin-response-section');
+const chatbotAdminInput = document.getElementById('chatbot-admin-input');
+const chatbotAdminSendBtn = document.getElementById('chatbot-admin-send-btn');
+
+// Notification Element
+const notificationDiv = document.createElement('div');
+notificationDiv.className = 'notification';
+document.body.appendChild(notificationDiv);
+
+
+// --- Utility Functions ---
+
+function formatPrice(price) {
+    return `${price.toLocaleString('pt-MZ', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MT`;
+}
+
+function saveCart() {
+    localStorage.setItem('angeloStoreCart', JSON.stringify(cart));
+}
+
+function updateCartCount() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCountSpan.textContent = totalItems;
+}
+
+function calculateCartTotal() {
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    cartTotalSpan.textContent = formatPrice(total);
+    checkoutFinalTotalSpan.textContent = formatPrice(total);
+    return total;
+}
+
+/**
+ * Shows a temporary notification message.
+ * @param {string} message - The message to display.
+ * @param {string} type - 'success' (green) or 'error' (red) or 'info' (blue).
+ */
+function showNotification(message, type = 'info') {
+    notificationDiv.textContent = message;
+    notificationDiv.className = 'notification show'; // Reset classes and add 'show'
+    if (type === 'success') {
+        notificationDiv.style.backgroundColor = '#28a745';
+    } else if (type === 'error') {
+        notificationDiv.style.backgroundColor = '#dc3545';
+    } else {
+        notificationDiv.style.backgroundColor = '#007bff';
+    }
+
+    setTimeout(() => {
+        notificationDiv.classList.remove('show');
+    }, 3000); // Hide after 3 seconds
+}
+
+// --- Product Display Functions ---
+
+function renderProducts(filterCategory = 'all') {
+    productGrid.innerHTML = '';
+    const filteredProducts = products.filter(product =>
+        filterCategory === 'all' || product.category === filterCategory
+    );
+
+    if (filteredProducts.length === 0) {
+        productGrid.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; margin-top: 3rem; font-size: 1.2rem; color: #555;">Nenhum produto encontrado nesta categoria.</p>';
+        return;
+    }
+
+    filteredProducts.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        productCard.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p class="price">${formatPrice(product.price)}</p>
+            <button class="add-to-cart-btn" data-id="${product.id}">Adicionar ao Carrinho</button>
+        `;
+
+        productCard.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('add-to-cart-btn')) {
+                openProductModal(product);
+            }
+        });
+
+        const addToCartBtn = productCard.querySelector('.add-to-cart-btn');
+        addToCartBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            addToCart(product);
+        });
+
+        productGrid.appendChild(productCard);
+    });
+}
+
+// --- Product Modal Functions ---
+
+function openProductModal(product) {
+    currentProductInModal = product;
+    modalImage.src = product.image;
+    modalTitle.textContent = product.name;
+    modalPrice.textContent = formatPrice(product.price);
+    modalDescription.textContent = product.description;
+    productModal.style.display = 'flex';
+}
+
+function closeProductModal() {
+    productModal.style.display = 'none';
+    currentProductInModal = null;
+}
+
+// --- Shopping Cart Functions ---
+
+function addToCart(product) {
+    const existingItem = cart.find(item => item.id === product.id);
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+    saveCart();
+    updateCartCount();
+    renderCartItems();
+    calculateCartTotal();
+    openCartSidebar();
+}
+
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    saveCart();
+    updateCartCount();
+    renderCartItems();
+    calculateCartTotal();
+    if (cart.length === 0) {
+        closeCartSidebar();
+    }
+}
+
+function updateQuantity(productId, change) {
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            removeFromCart(productId);
+        } else {
+            saveCart();
+            renderCartItems();
+            updateCartCount();
+            calculateCartTotal();
+        }
+    }
+}
+
+function renderCartItems() {
+    cartItemsList.innerHTML = '';
+    if (cart.length === 0) {
+        cartItemsList.innerHTML = '<p style="text-align: center; margin-top: 2rem;">Seu carrinho está vazio.</p>';
+        checkoutButton.disabled = true;
+        checkoutButton.style.opacity = 0.6;
+        checkoutButton.style.cursor = 'not-allowed';
+    } else {
+        checkoutButton.disabled = false;
+        checkoutButton.style.opacity = 1;
+        checkoutButton.style.cursor = 'pointer';
+        cart.forEach(item => {
+            const cartItemDiv = document.createElement('div');
+            cartItemDiv.className = 'cart-item';
+            cartItemDiv.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <div class="cart-item-details">
+                    <h4>${item.name}</h4>
+                    <p class="price">${formatPrice(item.price)}</p>
+                    <div class="cart-item-quantity">
+                        <button data-id="${item.id}" data-action="decrease">-</button>
+                        <span>${item.quantity}</span>
+                        <button data-id="${item.id}" data-action="increase">+</button>
+                    </div>
+                </div>
+                <button class="remove-item" data-id="${item.id}">Remover</button>
+            `;
+            cartItemsList.appendChild(cartItemDiv);
+        });
+
+        cartItemsList.querySelectorAll('.cart-item-quantity button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const id = parseInt(e.target.dataset.id);
+                const action = e.target.dataset.action;
+                if (action === 'increase') {
+                    updateQuantity(id, 1);
+                } else if (action === 'decrease') {
+                    updateQuantity(id, -1);
+                }
+            });
+        });
+        cartItemsList.querySelectorAll('.remove-item').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const id = parseInt(e.target.dataset.id);
+                removeFromCart(id);
+            });
+        });
+    }
+}
+
+// --- Cart Sidebar Functions ---
+
+function openCartSidebar() {
+    cartSidebar.classList.add('open');
+}
+
+function closeCartSidebar() {
+    cartSidebar.classList.remove('open');
+}
+
+// --- Checkout Functions ---
+
+function openCheckoutModal() {
+    // Enforce login before checkout
+    if (!currentUser) {
+        closeCartSidebar();
+        openAuthModal();
+        alert('Por favor, crie uma conta ou faça login para finalizar a compra.');
+        return;
+    }
+
+    if (cart.length === 0) {
+        alert('Seu carrinho está vazio. Adicione produtos antes de finalizar a compra.');
+        return;
+    }
+    renderCheckoutItems();
+    calculateCartTotal();
+    checkoutModal.style.display = 'flex';
+    closeCartSidebar();
+}
+
+function closeCheckoutModal() {
+    checkoutModal.style.display = 'none';
+    document.querySelectorAll('.payment-input-group').forEach(group => group.classList.add('hidden'));
+}
+
+function renderCheckoutItems() {
+    checkoutItemsList.innerHTML = '';
+    cart.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <span class="checkout-item-name">${item.name}</span>
+            <span class="checkout-item-qty">x${item.quantity}</span>
+            <span class="checkout-item-price">${formatPrice(item.price * item.quantity)}</span>
+        `;
+        checkoutItemsList.appendChild(listItem);
+    });
+}
+
+function handlePaymentMethodChange() {
+    document.querySelectorAll('.payment-input-group').forEach(group => group.classList.add('hidden'));
+
+    const selectedPaymentMethod = document.querySelector('input[name="payment"]:checked');
+
+    if (selectedPaymentMethod) {
+        switch (selectedPaymentMethod.value) {
+            case 'mpesa':
+                mpesaDetailsDiv.classList.remove('hidden');
+                break;
+            case 'mkesh':
+                mkeshDetailsDiv.classList.remove('hidden');
+                break;
+            case 'emola':
+                emolaDetailsDiv.classList.remove('hidden');
+                break;
+            case 'bankCard':
+                bankCardDetailsDiv.classList.remove('hidden');
+                break;
+        }
+    }
+}
+
+async function confirmPayment() {
+    const selectedPaymentMethod = document.querySelector('input[name="payment"]:checked');
+
+    if (!selectedPaymentMethod) {
+        alert('Por favor, selecione um método de pagamento.');
+        return;
+    }
+
+    const totalToPay = calculateCartTotal();
+    let paymentSuccess = false;
+
+    // --- Backend Interaction is CRUCIAL here for REAL payments ---
+    // Gather necessary payment data based on the selected method
+    let paymentData = {
+        method: selectedPaymentMethod.value,
+        amount: totalToPay,
+        items: cart.map(item => ({ id: item.id, name: item.name, quantity: item.quantity, price: item.price })),
+        userId: currentUser ? currentUser.id : null // IMPORTANT: Send user ID if logged in
+    };
+
+    switch (selectedPaymentMethod.value) {
+        case 'mpesa':
+            const mpesaNumber = document.getElementById('mpesa-number').value;
+            if (!mpesaNumber || !/^\d{9}$/.test(mpesaNumber)) { // Simple 9-digit validation
+                showNotification('Por favor, preencha um número M-Pesa válido (9 dígitos).', 'error');
+                return;
+            }
+            paymentData.details = { number: mpesaNumber };
+            alert(` Iniciando pagamento via M-Pesa valor de ${formatPrice(totalToPay)} do número ${mpesaNumber}. UM PROMPT DE PAGAMENTO SERÁ ENVIADO PARA SEU CELULAR ( DIGITE O PIN).`);
+
+            // Simulate PIN entry
+            const pin = prompt("Por favor, digite seu PIN para confirmar a transação:");
+            if (pin && pin.length >= 4) { // Basic PIN length check
+                showNotification('PIN recebido. Processando pagamento...', 'info');
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate processing
+                paymentSuccess = true; // In a real app, this would be determined by the payment gateway callback
+            } else {
+                showNotification('PIN inválido ou cancelado. Pagamento falhou.', 'error');
+                paymentSuccess = false;
+            }
+            break;
+        case 'mkesh':
+            const mkeshNumber = document.getElementById('mkesh-number').value;
+            if (!mkeshNumber || !/^\d{9}$/.test(mkeshNumber)) {
+                showNotification('Por favor, preencha um número M-Kesh válido (9 dígitos).', 'error');
+                return;
+            }
+            paymentData.details = { number: mkeshNumber };
+            alert(`Iniciando pagamento via  M-Kesh valor de ${formatPrice(totalToPay)} do número ${mkeshNumber}.`);
+
+            const mkeshPin = prompt("Por favor, digite seu PIN para confirmar a transação:");
+            if (mkeshPin && mkeshPin.length >= 4) {
+                showNotification('PIN recebido. Processando pagamento...', 'info');
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                paymentSuccess = true;
+            } else {
+                showNotification('PIN inválido ou cancelado. Pagamento falhou.', 'error');
+                paymentSuccess = false;
+            }
+            break;
+        case 'emola':
+            const emolaNumber = document.getElementById('emola-number').value;
+            if (!emolaNumber || !/^\d{9}$/.test(emolaNumber)) {
+                showNotification('Por favor, preencha um número eMola válido (9 dígitos).', 'error');
+                return;
+            }
+            paymentData.details = { number: emolaNumber };
+            alert(`Iniciando pagamento via e-Mola valor de ${formatPrice(totalToPay)} do número ${emolaNumber}.`);
+
+            const emolaPin = prompt("Por favor, digite seu PIN para confirmar a transação:");
+            if (emolaPin && emolaPin.length >= 4) {
+                showNotification('PIN recebido. Processando pagamento...', 'info');
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                paymentSuccess = true;
+            } else {
+                showNotification('PIN inválido ou cancelado. Pagamento falhou.', 'error');
+                paymentSuccess = false;
+            }
+            break;
+        case 'bankCard':
+            const cardNumber = document.querySelector('.card-input[placeholder="Número do Cartão"]').value;
+            const cardName = document.querySelector('.card-input[placeholder="Nome no Cartão"]').value;
+            const cardExpiry = document.querySelector('.card-input[placeholder="MM/AA"]').value;
+            const cardCVC = document.querySelector('.card-input[placeholder="CVC"]').value;
+            if (!cardNumber || !cardName || !cardExpiry || !cardCVC) {
+                showNotification('Por favor, preencha todos os detalhes do cartão bancário.', 'error');
+                return;
+            }
+            // Basic validation (e.g., card number length, expiry format)
+            if (!/^\d{16}$/.test(cardNumber.replace(/\s/g, '')) || !/^\d{2}\/\d{2}$/.test(cardExpiry) || !/^\d{3,4}$/.test(cardCVC)) {
+                showNotification('Por favor, verifique os detalhes do cartão (Número, Validade MM/AA, CVC).', 'error');
+                return;
+            }
+            paymentData.details = { cardNumber, cardName, cardExpiry, cardCVC }; // DANGER: For demonstration only! Use secure SDK in real app.
+            showNotification(` Processando pagamento de ${formatPrice(totalToPay)} com cartão bancário.`, 'info');
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate processing
+            paymentSuccess = true; // In a real app, this would be determined by the payment gateway callback
+            break;
+    }
+
+    if (paymentSuccess) {
+        console.log('Dados de Pagamento para Envio (CLIENT-SIDE DANGER if not using SDKs):', paymentData);
+
+        // --- Client-side Simulation of Success (FOR DEMO ONLY) ---
+        // In a real application, you'd send `paymentData` to your backend via `fetch` or Axios.
+        // The backend processes the payment with the gateway and returns success/failure.
+        showNotification('Pagamento bem-sucedido! Sua compra foi confirmada.', 'success');
+
+        // Record dummy payment history for demo purposes if user is logged in
+        if (currentUser) {
+            const dummyHistoryEntry = {
+                id: 'TRX' + Date.now().toString().slice(-6), // Simple unique ID
+                date: new Date().toLocaleDateString('pt-MZ'),
+                amount: totalToPay,
+                description: `Compra de ${cart.length} item(s) via ${selectedPaymentMethod.value}`,
+                items: cart.map(item => ({ name: item.name, qty: item.quantity, price: item.price })) // Store items of the purchase
+            };
+            currentUser.paymentHistory = currentUser.paymentHistory || [];
+            currentUser.paymentHistory.unshift(dummyHistoryEntry); // Add to beginning
+            localStorage.setItem('angeloStoreUser', JSON.stringify(currentUser));
+
+            // Also update the mockUsers 'database' for admin panel
+            const userIndex = mockUsers.findIndex(u => u.id === currentUser.id);
+            if (userIndex !== -1) {
+                mockUsers[userIndex].paymentHistory.unshift(dummyHistoryEntry);
+                localStorage.setItem('angeloStoreMockUsers', JSON.stringify(mockUsers));
+            }
+        }
+        cart = []; // Clear the cart
+        saveCart();
+        updateCartCount();
+        renderCartItems(); // Re-render empty cart
+        calculateCartTotal(); // Update total to 0
+        closeCheckoutModal(); // Close checkout modal
+
+        // Redirect to profile to show updated history
+        if (currentUser) {
+            setTimeout(() => {
+                openProfileModal();
+            }, 500); // Small delay to allow notification to be seen
+        }
+
+    } else {
+        // Notification already shown by individual payment method logic
+        console.error('Pagamento falhou ou foi cancelado.');
+    }
+}
+
+// --- Authentication Functions (Client-side simulation - Requires Backend for REALITY) ---
+
+function updateAuthUI() {
+    if (currentUser) {
+        profileLink.innerHTML = `<i class="fas fa-user"></i> Olá, ${currentUser.name || currentUser.email.split('@')[0]}!`;
+        profileLink.removeEventListener('click', openAuthModal);
+        profileLink.addEventListener('click', openProfileModal);
+        logoutButton.classList.remove('hidden');
+
+        // Show/hide admin panel link and admin chat section
+        if (currentUser.role === 'admin') {
+            adminPanelNavItem.classList.remove('hidden');
+            chatbotAdminResponseSection.classList.remove('hidden'); // Show admin response in chatbot
+        } else {
+            adminPanelNavItem.classList.add('hidden');
+            chatbotAdminResponseSection.classList.add('hidden'); // Hide admin response for regular users
+        }
+    } else {
+        profileLink.innerHTML = `<i class="fas fa-user"></i> Meu Perfil`;
+        profileLink.removeEventListener('click', openProfileModal);
+        profileLink.addEventListener('click', openAuthModal);
+        logoutButton.classList.add('hidden');
+        adminPanelNavItem.classList.add('hidden'); // Hide admin panel if not logged in
+        chatbotAdminResponseSection.classList.add('hidden'); // Hide admin response if not logged in
+    }
+}
+
+function openAuthModal() {
+    authModal.style.display = 'flex';
+    authTitle.textContent = 'Entrar';
+    authNameInput.classList.add('hidden');
+    authSubmitBtn.textContent = 'Entrar';
+    switchToRegisterLink.classList.remove('hidden');
+    switchToLoginLink.classList.add('hidden');
+    authForm.reset();
+}
+
+function closeAuthModal() {
+    authModal.style.display = 'none';
+}
+
+function handleAuthSubmit(event) {
+    event.preventDefault();
+    const email = authEmailInput.value.toLowerCase(); // Standardize email
+    const password = authPasswordInput.value;
+    const name = authNameInput.value;
+
+    if (authSubmitBtn.textContent === 'Registrar') {
+        // --- Simulate Registration (Backend required for real registration and security) ---
+        console.log('Attempting registration:', { name, email, password });
+        // Check if user already exists (mock check)
+        if (mockUsers.some(u => u.email === email)) {
+            alert('Este email já está registrado. Por favor, faça login.');
+            return;
+        }
+        const newUserId = 'user' + (mockUsers.length + 1);
+        const newUser = { id: newUserId, name, email, role: 'user', paymentHistory: [] };
+        mockUsers.push(newUser);
+        localStorage.setItem('angeloStoreMockUsers', JSON.stringify(mockUsers)); // Update mock DB
+
+        alert('Registro bem-sucedido! Você está agora logado.');
+        currentUser = newUser; // Auto-login after registration
+        localStorage.setItem('angeloStoreUser', JSON.stringify(currentUser));
+        closeAuthModal();
+        updateAuthUI();
+        openProfileModal(); // Open profile after registration/login
+    } else {
+        // --- Simulate Login (Backend required for real login and session management) ---
+        console.log('Attempting login:', { email, password });
+
+        // Admin login check
+        if (email === "admin@gmail.com" && password === "admin123") {
+            currentUser = mockUsers.find(u => u.email === "admin@gmail.com"); // Get the mock admin user
+            localStorage.setItem('angeloStoreUser', JSON.stringify(currentUser));
+            alert('Login de Administrador bem-sucedido!');
+            closeAuthModal();
+            updateAuthUI();
+            openAdminModal(); // Open admin panel for admin
+            return;
+        }
+
+        // Regular user login check (mock check)
+        const foundUser = mockUsers.find(u => u.email === email);
+        if (foundUser && password === "password123") { // Simplified password check for demo
+            currentUser = foundUser;
+            localStorage.setItem('angeloStoreUser', JSON.stringify(currentUser));
+            alert('Login bem-sucedido!');
+            closeAuthModal();
+            updateAuthUI();
+            openProfileModal(); // Open profile after registration/login
+        } else {
+            alert('Email ou senha incorretos. Tente novamente.');
+        }
+    }
+}
+
+function switchToRegister() {
+    authTitle.textContent = 'Registrar';
+    authNameInput.classList.remove('hidden');
+    authSubmitBtn.textContent = 'Registrar';
+    switchToRegisterLink.classList.add('hidden');
+    switchToLoginLink.classList.remove('hidden');
+    authForm.reset();
+}
+
+function switchToLogin() {
+    authTitle.textContent = 'Entrar';
+    authNameInput.classList.add('hidden');
+    authSubmitBtn.textContent = 'Entrar';
+    switchToRegisterLink.classList.remove('hidden');
+    switchToLoginLink.classList.add('hidden');
+    authForm.reset();
+}
+
+// --- Profile Functions (User Dashboard) ---
+
+function openProfileModal() {
+    if (!currentUser) {
+        openAuthModal();
+        return;
+    }
+    profileModal.style.display = 'flex';
+    profileNameSpan.textContent = currentUser.name || "N/A";
+    profileEmailSpan.textContent = currentUser.email || "N/A";
+    renderPaymentHistory();
+}
+
+function closeProfileModal() {
+    profileModal.style.display = 'none';
+}
+
+function renderPaymentHistory() {
+    paymentHistoryList.innerHTML = '';
+    if (currentUser && currentUser.paymentHistory && currentUser.paymentHistory.length > 0) {
+        // Sort history by date, newest first
+        const sortedHistory = [...currentUser.paymentHistory].sort((a, b) => {
+            const [dA, mA, yA] = a.date.split('/');
+            const [dB, mB, yB] = b.date.split('/');
+            const dateA = new Date(`${yA}-${mA}-${dA}`);
+            const dateB = new Date(`${yB}-${mB}-${dB}`);
+            return dateB - dateA;
+        });
+
+
+        sortedHistory.forEach(transaction => {
+            const listItem = document.createElement('li');
+            const itemsBought = transaction.items.map(item => `${item.name} (x${item.qty})`).join(', ');
+            listItem.innerHTML = `
+                <div class="history-item-details">
+                    <p><strong>Descrição:</strong> ${transaction.description}</p>
+                    <p><strong>Itens:</strong> ${itemsBought}</p>
+                    <p><strong>ID da Transação:</strong> ${transaction.id}</p>
+                </div>
+                <p><span class="history-date">${transaction.date}</span> - <span class="history-amount">${formatPrice(transaction.amount)}</span></p>
+            `;
+            paymentHistoryList.appendChild(listItem);
+        });
+    } else {
+        paymentHistoryList.innerHTML = '<li><p>Nenhuma compra registrada ainda.</p></li>';
+    }
+}
+
+function logout() {
+    currentUser = null;
+    localStorage.removeItem('angeloStoreUser');
+    alert('Você foi desconectado.');
+    updateAuthUI();
+    closeProfileModal();
+}
+
+// --- About Us Functions ---
+function openAboutUsModal() {
+    aboutUsModal.style.display = 'flex';
+}
+
+function closeAboutUsModal() {
+    aboutUsModal.style.display = 'none';
+}
+
+// --- Admin Panel Functions ---
+
+function openAdminModal() {
+    if (!currentUser || currentUser.role !== 'admin') {
+        alert('Acesso negado. Apenas administradores podem acessar esta área.');
+        return;
+    }
+    adminModal.style.display = 'flex';
+    switchAdminTab('users'); // Default to users tab
+    renderAdminUsers();
+    renderAdminTransactions();
+}
+
+function closeAdminModal() {
+    adminModal.style.display = 'none';
+}
+
+function switchAdminTab(tabName) {
+    adminTabButtons.forEach(button => {
+        if (button.dataset.tab === tabName) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+
+    if (tabName === 'users') {
+        adminUsersTab.classList.remove('hidden');
+        adminTransactionsTab.classList.add('hidden');
+        renderAdminUsers();
+    } else if (tabName === 'transactions') {
+        adminUsersTab.classList.add('hidden');
+        adminTransactionsTab.classList.remove('hidden');
+        renderAdminTransactions();
+    }
+}
+
+function renderAdminUsers() {
+    adminUserList.innerHTML = '';
+    const users = mockUsers.filter(u => u.role === 'user'); // Only show regular users
+
+    if (users.length === 0) {
+        adminUserList.innerHTML = '<li><p>Nenhum usuário comum cadastrado.</p></li>';
+        return;
+    }
+
+    users.forEach(user => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <p><strong>Nome:</strong> ${user.name} | <strong>Email:</strong> ${user.email}</p>
+            <button class="reset-password-btn" data-id="${user.id}">Redefinir Senha</button>
+        `;
+        adminUserList.appendChild(listItem);
+    });
+
+    adminUserList.querySelectorAll('.reset-password-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const userId = e.target.dataset.id;
+            resetUserPassword(userId);
+        });
+    });
+}
+
+function renderAdminTransactions() {
+    adminTransactionList.innerHTML = '';
+    let allTransactions = [];
+
+    // Collect all transactions from all users (including admin's if any, though usually admin doesn't buy)
+    mockUsers.forEach(user => {
+        if (user.paymentHistory) {
+            user.paymentHistory.forEach(transaction => {
+                allTransactions.push({ ...transaction, userName: user.name, userEmail: user.email });
+            });
+        }
+    });
+
+    // Sort transactions by date (newest first)
+    allTransactions.sort((a, b) => {
+        const [dA, mA, yA] = a.date.split('/');
+        const [dB, mB, yB] = b.date.split('/');
+        const dateA = new Date(`${yA}-${mA}-${dA}`);
+        const dateB = new Date(`${yB}-${mB}-${dB}`);
+        return dateB - dateA;
+    });
+
+
+    if (allTransactions.length === 0) {
+        adminTransactionList.innerHTML = '<li><p>Nenhuma transação registrada.</p></li>';
+        return;
+    }
+
+    allTransactions.forEach(transaction => {
+        const listItem = document.createElement('li');
+        const itemsBought = transaction.items.map(item => `${item.name} (x${item.qty})`).join(', ');
+        listItem.innerHTML = `
+            <div class="transaction-details">
+                <p><strong>Cliente:</strong> ${transaction.userName} (${transaction.userEmail})</p>
+                <p><strong>Data:</strong> ${transaction.date}</p>
+                <p><strong>Valor:</strong> ${formatPrice(transaction.amount)}</p>
+                <p><strong>Descrição:</strong> ${transaction.description}</p>
+                <p><strong>Itens:</strong> ${itemsBought}</p>
+                <p><strong>ID Transação:</strong> ${transaction.id}</p>
+            </div>
+        `;
+        adminTransactionList.appendChild(listItem);
+    });
+}
+
+function resetUserPassword(userId) {
+    // --- Backend interaction is CRITICAL here ---
+    // In a real app, you would send an API request to your backend to reset the password.
+    // The backend would typically generate a temporary password or send a password reset link to the user's email.
+    const userToReset = mockUsers.find(u => u.id === userId);
+    if (userToReset) {
+        alert(`Simulação: A senha do usuário ${userToReset.name} (${userToReset.email}) foi redefinida para uma senha temporária (ou um email de redefinição foi enviado).`);
+        console.log(`Admin requested password reset for user ID: ${userId}`);
+        // You'd typically update a flag in your database or send an email here.
+        // For this frontend demo, we don't actually change the "password".
+    } else {
+        alert('Usuário não encontrado.');
+    }
+}
+
+// --- Terms & Conditions Functions ---
+function openTermsModal() {
+    termsModal.style.display = 'flex';
+}
+
+function closeTermsModal() {
+    termsModal.style.display = 'none';
+}
+
+// --- Chatbot Functions ---
+function openChatbot() {
+    chatbotModal.classList.add('open');
+    renderChatMessages();
+    chatbotMessagesDiv.scrollTop = chatbotMessagesDiv.scrollHeight; // Scroll to bottom
+}
+
+function closeChatbot() {
+    chatbotModal.classList.remove('open');
+}
+
+function renderChatMessages() {
+    chatbotMessagesDiv.innerHTML = '';
+    chatMessages.forEach(msg => {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${msg.sender}`;
+        messageDiv.textContent = msg.text;
+        chatbotMessagesDiv.appendChild(messageDiv);
+    });
+    chatbotMessagesDiv.scrollTop = chatbotMessagesDiv.scrollHeight; // Scroll to bottom after rendering
+}
+
+function sendUserMessage() {
+    const messageText = chatbotUserInput.value.trim();
+    if (messageText) {
+        chatMessages.push({ sender: 'user', text: messageText });
+        localStorage.setItem('angeloStoreChatMessages', JSON.stringify(chatMessages));
+        renderChatMessages();
+        chatbotUserInput.value = '';
+
+        // Simple bot auto-response (for demo purposes)
+        setTimeout(() => {
+            let botResponse = 'Obrigado pela sua mensagem! Um administrador responderá em breve.';
+            if (messageText.toLowerCase().includes('compra') || messageText.toLowerCase().includes('pedido')) {
+                botResponse = 'Para verificar o status do seu pedido, por favor, visite a seção "Meu Perfil" após fazer login. Se precisar de mais ajuda, aguarde a resposta de um administrador.';
+            } else if (messageText.toLowerCase().includes('entrega')) {
+                botResponse = 'As informações de entrega podem ser encontradas na página do produto ou no seu histórico de compras. Para detalhes específicos, um administrador entrará em contacto.';
+            }
+            chatMessages.push({ sender: 'bot', text: botResponse });
+            localStorage.setItem('angeloStoreChatMessages', JSON.stringify(chatMessages));
+            renderChatMessages();
+        }, 1000); // Simulate typing delay
+    }
+}
+
+function sendAdminMessage() {
+    const messageText = chatbotAdminInput.value.trim();
+    if (messageText && currentUser && currentUser.role === 'admin') {
+        chatMessages.push({ sender: 'admin', text: messageText });
+        localStorage.setItem('angeloStoreChatMessages', JSON.stringify(chatMessages));
+        renderChatMessages();
+        chatbotAdminInput.value = '';
+    }
+}
+
+
+// --- Event Listeners ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts(); // Render all products initially
+    updateCartCount();
+    renderCartItems();
+    calculateCartTotal();
+    updateAuthUI(); // Initialize auth UI on page load
+    renderChatMessages(); // Load existing chat messages
+});
+
+shopNowButton.addEventListener('click', () => {
+    const productsSection = document.querySelector('.products');
+    productsSection.scrollIntoView({ behavior: 'smooth' });
+});
+
+// Category filter listeners
+categoryLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const category = e.target.dataset.category;
+        renderProducts(category);
+        // Optional: Close dropdown after selection
+        e.target.closest('.dropdown-menu').style.display = 'none';
+    });
+});
+
+// Product Modal Listeners
+modalAddToCartButton.addEventListener('click', () => {
+    if (currentProductInModal) {
+        addToCart(currentProductInModal);
+        closeProductModal();
+    }
+});
+closeModalButton.addEventListener('click', closeProductModal);
+window.addEventListener('click', (event) => {
+    if (event.target === productModal) {
+        closeProductModal();
+    }
+});
+
+// Cart Sidebar Listeners
+openCartSidebarBtn.addEventListener('click', openCartSidebar);
+closeCartSidebarBtn.addEventListener('click', closeCartSidebar);
+window.addEventListener('click', (event) => {
+    if (event.target === cartSidebar) return; // Ignore clicks on the sidebar itself
+    if (event.target === openCartSidebarBtn || openCartSidebarBtn.contains(event.target)) return; // Ignore clicks on open button
+    if (event.target === checkoutButton || checkoutButton.contains(event.target)) return; // Ignore clicks on checkout button
+    // Close sidebar if click is outside of it, and it's open
+    if (cartSidebar.classList.contains('open') && !cartSidebar.contains(event.target)) {
+        closeCartSidebar();
+    }
+});
+
+
+// Checkout Modal Listeners
+checkoutButton.addEventListener('click', openCheckoutModal);
+closeCheckoutModalButton.addEventListener('click', closeCheckoutModal);
+window.addEventListener('click', (event) => {
+    if (event.target === checkoutModal) {
+        closeCheckoutModal();
+    }
+});
+
+// Payment method radio buttons listener
+paymentOptions.forEach(radio => {
+    radio.addEventListener('change', handlePaymentMethodChange);
+});
+confirmPaymentButton.addEventListener('click', confirmPayment);
+
+
+// Auth Modal Listeners
+profileLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentUser) {
+        openProfileModal();
+    } else {
+        openAuthModal();
+    }
+});
+closeAuthModalButton.addEventListener('click', closeAuthModal);
+authForm.addEventListener('submit', handleAuthSubmit);
+switchToRegisterLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    switchToRegister();
+});
+switchToLoginLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    switchToLogin();
+});
+window.addEventListener('click', (event) => {
+    if (event.target === authModal) {
+        closeAuthModal();
+    }
+});
+
+// Profile Modal Listeners
+closeProfileModalButton.addEventListener('click', closeProfileModal);
+logoutButton.addEventListener('click', logout);
+window.addEventListener('click', (event) => {
+    if (event.target === profileModal) {
+        closeProfileModal();
+    }
+});
+
+// About Us Modal Listeners
+aboutUsLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    openAboutUsModal();
+});
+closeAboutUsModalButton.addEventListener('click', closeAboutUsModal);
+window.addEventListener('click', (event) => {
+    if (event.target === aboutUsModal) {
+        closeAboutUsModal();
+    }
+});
+
+// Admin Panel Listeners
+adminPanelLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    openAdminModal();
+});
+closeAdminModalButton.addEventListener('click', closeAdminModal);
+adminTabButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        switchAdminTab(e.target.dataset.tab);
+    });
+});
+window.addEventListener('click', (event) => {
+    if (event.target === adminModal) {
+        closeAdminModal();
+    }
+});
+
+// Terms & Conditions Listeners
+termsLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    openTermsModal();
+});
+closeTermsModalButton.addEventListener('click', closeTermsModal);
+window.addEventListener('click', (event) => {
+    if (event.target === termsModal) {
+        closeTermsModal();
+    }
+});
+
+// Chatbot Listeners
+chatbotToggle.addEventListener('click', () => {
+    if (chatbotModal.classList.contains('open')) {
+        closeChatbot();
+    } else {
+        openChatbot();
+    }
+});
+closeChatbotButton.addEventListener('click', closeChatbot);
+chatbotSendBtn.addEventListener('click', sendUserMessage);
+chatbotUserInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendUserMessage();
+    }
+});
+
+chatbotAdminSendBtn.addEventListener('click', sendAdminMessage);
+chatbotAdminInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendAdminMessage();
+    }
+});
+
+// Close chatbot if clicking outside (but not on the toggle itself)
+window.addEventListener('click', (event) => {
+    if (!chatbotModal.contains(event.target) && !chatbotToggle.contains(event.target) && chatbotModal.classList.contains('open')) {
+        closeChatbot();
+    }
+});
+
+</script>
